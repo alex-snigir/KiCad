@@ -1,0 +1,60 @@
+Create a Symbol/Footprint Library:
+==================================
+  > KiCad => Инструменты => Редакторе символов (Symbol Editor) / Footprint Editor
+  > File => New Library => [Global]
+    Name: _my_ESP_Dev_Boards.*
+	
+Create the Symbol:
+==================
+  > Right-click your new library in the list and select New Symbol
+  > Use the Drawing Tools on the right toolbar to draw the body
+  > Add Pins (The Most Important Part)
+    > Click the Add Pin icon (usually a horizontal line with a circle at the end) or press P.
+	> Pin Name: The functional name (e.g., VCC, GND).
+	> Pin Number: Must match the pad number on the footprint (e.g., 1, 2, 3)
+	> Electrical Type: Critical for ERC (Electrical Rules Check). Use Power Input for VCC/GND, Input for signals, etc.
+  > Place the pin so the small circle (connection point) faces outside the symbol body.
+  > Finalize and Save:
+    > Drag the text fields (REF** and Value) outside the body so they don't overlap your drawing.
+  
+Create the Footprint:
+=====================
+  > Right-click your library and select New Footprint.
+  > Crucial: Check your Grid settings (top toolbar). 
+    If the datasheet uses millimeters (mm), set KiCad to mm and choose a grid size that matches the lead spacing (e.g., 0.5mm or 0.1mm).
+	> 1,2700 mm (50,00 mils)
+  > Add Pads:
+    > Select the Add Pad tool (or press P).
+	> Press E while hovering over the pad to open Pad Properties:
+	  > Pad Number: This must match the pin number in your schematic symbol.
+      > Pad Type: Choose SMD (surface mount) or Through-hole.
+	  > Shape & Size: Circle: 2mm/0.95mm 
+  > Draw the Outlines (Silk & Fab)
+    > Silkscreen (F.Silkscreen): Draw the lines that will be printed in white ink on the board. Don't draw over the pads!
+	> Fab Layer (F.Fab): Draw the exact physical outline of the component body. This helps with assembly.
+	> Courtyard (F.Courtyard): Draw a closed rectangle around the entire part. This is the "keep-out" zone to prevent other parts from being placed too close.
+  
+  
+Как найти точный путь к библиотекам:
+====================================
+ KiCad => Настройки (Settings) => Менеджер библиотек символов (Manage Symbol Libraries):
+ C:/Users/alexandersn/Documents/KiCad/9.0/symbols/_my_Relay_Modules.kicad_sym
+ 
+Перенести библиотеку символов (или посадочных мест) в другую папку:
+===================================================================
+  > Закройте KiCad и перенесите файл вашей библиотеки
+  > Откройте KiCad и перейдите в
+    KiCad => Настройки (Settings) => Менеджер библиотек символов (Manage Symbol Libraries) 
+  > Найдите вашу библиотеку в списке, выделите её и нажмите кнопку Удалить библиотеку. Это удалит только ссылку из списка, а не сам файл.
+  > Добавьте библиотеку заново:
+    Pless [+], Add name and path, Press [OK]
+	
+Привязать посадочное место (Footprint) к символу:
+=================================================
+  > KiCad => Инструменты => Редакторе символов (Symbol Editor)
+  > Найдите вашу библиотеку и выберите нужный компонент
+  > Нажмите кнопку Свойства символа (иконка с шестеренкой на верхней панели)
+  > Найдите поле Footprint
+  > Нажмите на иконку библиотеки (маленькая книжка) в правой части этой строки
+  > Откроется браузер посадочных мест. Найдите нужный и дважды кликните по нему.
+  > Сохраните: Нажмите [ОК]
